@@ -32,3 +32,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+div.card {
+    max-width: 400px;
+    width: 100%;
+    margin: 5px;
+}
+</style>
