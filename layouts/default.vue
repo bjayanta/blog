@@ -2,7 +2,11 @@
   <section>
     <nav class="navbar navbar-expand-lg navbar-light">
       <section class="container">
-        <nuxt-link class="navbar-brand" to="/">CodeRill</nuxt-link>
+        <nuxt-link class="navbar-brand" to="/">
+          <img src="~assets/images/logo.jpeg" alt="Logo" width="28">
+          CodeRill
+        </nuxt-link>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
