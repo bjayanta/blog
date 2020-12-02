@@ -1,16 +1,24 @@
 <template>
   <section>
-    <TheHeader />
+    <TheMainNav @getStarted="displayModel = !displayModel" />
+    <TheHeader :show="displayModel" @close="displayModel = false" />
     <Nuxt />
   </section>
 </template>
 
 <script>
+import TheMainNav from "@/components/Navigation/TheMainNav";
 import TheHeader from "@/components/Navigation/TheHeader";
 
 export default {
   components: {
+    TheMainNav,
     TheHeader
+  },
+  data() {
+    return {
+      displayModel: false
+    }
   }
 }
 </script>
