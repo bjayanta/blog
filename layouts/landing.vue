@@ -1,6 +1,7 @@
 <template>
   <section>
     <TheMainNav />
+    <TheHeader />
     <Nuxt />
     <TheFoorter />
   </section>
@@ -8,11 +9,13 @@
 
 <script>
 import TheMainNav from "@/components/Navigation/TheMainNav";
+import TheHeader from "@/components/Navigation/TheHeader";
 import TheFoorter from "@/components/TheFoorter";
 
 export default {
   components: {
     TheMainNav,
+    TheHeader,
     TheFoorter
   }
 }

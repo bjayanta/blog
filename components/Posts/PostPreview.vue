@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 div.card {
-    max-width: 400px;
+    max-width: 420px;
     width: 100%;
     margin: 5px;
 }
