@@ -1,1 +1,45 @@
 version: '3.8'
+services:
+
+  # PHP Service
+  php:
+    build:
+      context: .
+      target: php
+      args:
+        - APP_ENV=${APP_ENV}
+    environment:
+      - APP_ENV=${APP_ENV}
+      - CONTAINER_ROLE=app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - 8000:8000
+    depends_on:
+      - database
+      - redis
+      
+  # Database Server
+  database:
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    
+  # Redis Server
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+    ports:
+      - 6379:6379
+
+volumes:
+  db-data: ~
