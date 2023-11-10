@@ -2,12 +2,14 @@ version: '3.8'
 services:
 
   # PHP Service
-  php:
+  app:
     build:
       context: .
       target: php
       args:
         - APP_ENV=${APP_ENV}
+    container_name: blog-app
+    restart: unless-stopped
     environment:
       - APP_ENV=${APP_ENV}
       - CONTAINER_ROLE=app
@@ -19,13 +21,17 @@ services:
     depends_on:
       - database
       - redis
+    networks:
+      - blog
       
   # Database Server
   database:
     image: mysql:latest
+    container_name: blog-db
     restart: always
     ports:
       - 3306:3306
+    command: mysqld --default-authentication-plugin=caching_sha2_password
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
@@ -33,13 +39,22 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
+    networks:
+      - blog
     
   # Redis Server
   redis:
     image: redis:alpine
+    container_name: blog-redis
     command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
     ports:
       - 6379:6379
+    networks:
+      - blog
 
 volumes:
   db-data: ~
+
+networks:
+  blog:
+    driver: bridge

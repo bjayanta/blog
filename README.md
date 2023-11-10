@@ -46,3 +46,7 @@ Down all containers
 ```bash
 docker-compose down
 ```
+
+```bash
+docker-compose exec <container-id> bash
+```

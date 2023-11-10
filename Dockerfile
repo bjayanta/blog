@@ -1,7 +1,11 @@
 FROM php:8.2 as php
 
+# Install system dependencies
 RUN apt-get update -y
-RUN apt-get install -y unzip libpq-dev libcurl4-gnutls-dev
+RUN apt-get install -y git curl libpq-dev libcurl4-gnutls-dev zip unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP Extension
 RUN docker-php-ext-install pdo_mysql bcmath
